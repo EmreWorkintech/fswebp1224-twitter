@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 function Login() {
   const {
@@ -13,12 +14,13 @@ function Login() {
     defaultValues: { email: "", password: "" },
     mode: "onChange",
   });
+  const [user, setUser] = useLocalStorage("user", null);
 
   const history = useHistory();
 
   function submitFn(data) {
     //TODO
-    console.log(data);
+    setUser(data);
     toast.success(`Merhaba kullanıcı ${data.email}`);
     history.push("/feed");
   }
