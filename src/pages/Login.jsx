@@ -2,6 +2,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { toast } from "react-toastify";
 
 function Login() {
   const {
@@ -18,6 +19,7 @@ function Login() {
   function submitFn(data) {
     //TODO
     console.log(data);
+    toast.success(`Merhaba kullanıcı ${data.email}`);
     history.push("/feed");
   }
 
