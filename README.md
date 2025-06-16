@@ -20,6 +20,7 @@
 
 ## Tekrar -3
 
+\[ \] UI 
 \[ \] tanstack query  
 \[ \] AI ile translation  
 \[ \] AI hook'u oluşturma
@@ -28,6 +29,6 @@
 
 \[ \] axios instance  
 \[ \] authentication  
-\[ \] prvate route oluşturma  
+\[ \] private route oluşturma  
 \[ \] react testing library ile entegrasyon testi  
 \[ \] deploy
