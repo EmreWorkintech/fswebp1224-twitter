@@ -1,9 +1,9 @@
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { toast } from "react-toastify";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 function Login() {
   const {
@@ -11,18 +11,14 @@ function Login() {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({
-    defaultValues: { email: "", password: "" },
+    defaultValues: { username: "", password: "" },
     mode: "onChange",
   });
-  const [user, setUser] = useLocalStorage("user", null);
-
-  const history = useHistory();
+  const { logIn } = useContext(UserContext);
 
   function submitFn(data) {
     //TODO
-    setUser(data);
-    toast.success(`Merhaba kullanıcı ${data.email}`);
-    history.push("/feed");
+    logIn(data);
   }
 
   return (
@@ -34,27 +30,16 @@ function Login() {
         onSubmit={handleSubmit(submitFn)}
       >
         <input
-          {...register("email", {
-            pattern: {
-              value:
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              message: "Geçerli email adresi giriniz!",
-            },
-          })}
+          {...register("username")}
           className="px-2 py-4 rounded-sm border border-slate-300"
           placeholder="Email address"
-          type="email"
+          type="text"
         />
         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
         <input
           {...register("password", {
             validate: (value) => {
-              return (
-                (value.length >= 8 &&
-                  value.toUpperCase() != value &&
-                  value.toLowerCase() != value) ||
-                "Strong password giriniz"
-              );
+              return value.length >= 8 || "Strong password giriniz";
             },
           })}
           className="px-2 py-4 rounded-sm border border-slate-300"
