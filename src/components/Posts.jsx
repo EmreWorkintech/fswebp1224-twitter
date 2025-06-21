@@ -1,13 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 import PostItem from "./PostItem.jsx";
+import axios from "axios";
 
 function Posts() {
-  const posts = useSelector((store) => store.tweets);
-  const loading = useSelector((store) => store.loading);
-  const error = useSelector((store) => store.error);
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => {
+      return axios.get("https://dummyjson.com/posts").then((res) => {
+        return res.data.posts;
+      });
+    },
+    staleTime: 1000 * 10,
+  });
 
-  if (loading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
