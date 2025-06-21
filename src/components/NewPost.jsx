@@ -1,29 +1,20 @@
 import { useForm } from "react-hook-form";
 import { useAddPost } from "../services/mutations";
-import { GoogleGenAI } from "@google/genai";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandSparkles } from "@fortawesome/free-solid-svg-icons";
+import { useAI } from "../hooks/useAI";
 
 function NewPost() {
   const { register, handleSubmit, reset, setValue, getValues } = useForm();
-
   const mutation = useAddPost();
+
+  const { askAI } = useAI(
+    "Convert this text to spanish. do not use markdown. only return translated text."
+  );
 
   function submitFn(data) {
     mutation.mutate(data);
     reset();
-  }
-
-  async function translate() {
-    const ai = new GoogleGenAI({
-      apiKey: "AIzaSyCEVRuuy0aIR2BBQ7lT7XrW0QzC9kyF8P4",
-    });
-    const chat = ai.chats.create({ model: "gemini-2.0-flash" });
-
-    const response = await chat.sendMessage({
-      message: "Convert these text to english: " + getValues().title,
-    });
-    setValue("title", response.text);
   }
 
   if (mutation.error) return <p>{mutation.error.message}</p>;
@@ -40,7 +31,12 @@ function NewPost() {
         {...register("title")}
       />
       <input type="hidden" value={5} {...register("userId")} />
-      <div onClick={translate}>
+      <div
+        onClick={async () => {
+          const res = await askAI(getValues().title);
+          setValue("title", res);
+        }}
+      >
         <FontAwesomeIcon icon={faWandSparkles} />
       </div>
       <button className="bg-blue-400 rounded-full px-6 text-white">
