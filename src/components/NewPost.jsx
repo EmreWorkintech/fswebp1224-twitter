@@ -1,21 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useAddPost } from "../services/mutations";
 
 function NewPost() {
   const { register, handleSubmit, reset } = useForm();
-  const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: (postData) => {
-      return axios
-        .post("https://dummyjson.com/posts/add", postData)
-        .then((res) => res.data);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
+  const mutation = useAddPost();
 
   function submitFn(data) {
     mutation.mutate(data);

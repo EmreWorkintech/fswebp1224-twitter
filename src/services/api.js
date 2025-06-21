@@ -5,3 +5,9 @@ export function getPostList() {
     return res.data.posts;
   });
 }
+
+export const addPost = (postData) => {
+  return axios
+    .post("https://dummyjson.com/posts/add", postData)
+    .then((res) => res.data);
+};
