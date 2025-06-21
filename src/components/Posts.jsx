@@ -1,21 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import PostItem from "./PostItem.jsx";
-import axios from "axios";
+import { usePosts } from "../services/queries.js";
 
 function Posts() {
-  const {
-    data: posts,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["posts"],
-    queryFn: () => {
-      return axios.get("https://dummyjson.com/posts").then((res) => {
-        return res.data.posts;
-      });
-    },
-    staleTime: 1000 * 10,
-  });
+  const { data: posts, isLoading, error } = usePosts();
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
