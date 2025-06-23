@@ -9,13 +9,13 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 
-function Wrapper() {
+function Wrapper({ children }) {
   return (
     <BrowserRouter>
       <UserContextProvider>
         <Provider store={myStore}>
           <QueryClientProvider client={queryClient}>
-            <App />
+            {children}
             <ReactQueryDevtools initialIsOpen />
           </QueryClientProvider>
         </Provider>

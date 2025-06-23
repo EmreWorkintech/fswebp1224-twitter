@@ -31,4 +31,4 @@
 \[x\] authentication  
 \[x\] private route oluşturma  
 \[x\] react testing library ile entegrasyon testi  
-\[ \] deploy
+\[x\] deploy

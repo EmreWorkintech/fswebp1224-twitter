@@ -4,6 +4,7 @@ import Wrapper from "./Wrapper";
 import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import { vi } from "vitest";
+import App from "./App";
 
 vi.mock("axios");
 
@@ -14,7 +15,11 @@ beforeEach(() => {
 describe("App", () => {
   it("renders the App component", async () => {
     //Arrange
-    render(<Wrapper />);
+    render(
+      <Wrapper>
+        <App />
+      </Wrapper>
+    );
     const user = userEvent.setup();
 
     const emailInput = screen.getByPlaceholderText("Email address");
