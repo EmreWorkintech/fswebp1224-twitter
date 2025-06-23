@@ -5,6 +5,7 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import Login from "./pages/Login";
 import Feed from "./pages/Feed";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -16,9 +17,9 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/feed">
+        <ProtectedRoute path="/feed" exact>
           <Feed />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </>
   );

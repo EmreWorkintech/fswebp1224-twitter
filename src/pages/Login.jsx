@@ -45,6 +45,7 @@ function Login() {
           className="px-2 py-4 rounded-sm border border-slate-300"
           placeholder="Password"
           type="password"
+          data-testid="passInput"
         />
         {errors.password && (
           <p className="text-red-500">{errors.password.message}</p>

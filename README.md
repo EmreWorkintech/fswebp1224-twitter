@@ -20,15 +20,15 @@
 
 ## Tekrar -3
 
-\[ \] UI 
-\[ \] tanstack query  
-\[ \] AI ile translation  
-\[ \] AI hook'u oluşturma
+\[x\] UI 
+\[x\] tanstack query  
+\[x\] AI ile translation  
+\[x\] AI hook'u oluşturma
 
 ## Tekrar -4
 
-\[ \] axios instance  
-\[ \] authentication  
-\[ \] private route oluşturma  
-\[ \] react testing library ile entegrasyon testi  
+\[x\] axios instance  
+\[x\] authentication  
+\[x\] private route oluşturma  
+\[x\] react testing library ile entegrasyon testi  
 \[ \] deploy
